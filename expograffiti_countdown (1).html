@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuenta Regresiva - ExpoGraffiti</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial Black', sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .logo {
+      max-width: 180px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: 0 20px 20px;
+      color: #fff300;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .countdown {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      font-size: 1.8em;
+    }
+
+    .countdown div {
+      background: #222;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff0080;
+      color: #ffea00;
+      min-width: 80px;
+    }
+
+    .label {
+      font-size: 0.5em;
+      display: block;
+      color: #ccc;
+      margin-top: 5px;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.5em;
+      }
+      .countdown {
+        font-size: 1.2em;
+      }
+      .countdown div {
+        min-width: 60px;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img src="https://i.imgur.com/JYpJkxC.png" alt="Logo ExpoGraffiti" class="logo">
+  <h1>¡Faltan solo...</h1>
+  <div class="countdown">
+    <div><span id="days">0</span><span class="label">Días</span></div>
+    <div><span id="hours">0</span><span class="label">Horas</span></div>
+    <div><span id="minutes">0</span><span class="label">Min</span></div>
+    <div><span id="seconds">0</span><span class="label">Seg</span></div>
+  </div>
+
+  <script>
+    const eventDate = new Date("2025-07-13T08:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        document.querySelector('.countdown').innerHTML = "<h2>¡Ya comenzó ExpoGraffiti!</h2>";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
